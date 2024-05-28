@@ -1,5 +1,5 @@
 import React, { Dispatch, createContext, useContext, useReducer } from "react";
-import { generateGrid } from "../game_logic/grid";
+import { initializeGrid } from "../game_logic/grid";
 import { ReducerAction } from "../../../types/reducers";
 
 export const GridContext = createContext<boolean[][] | null>(null);
@@ -35,7 +35,7 @@ interface GridAction extends ReducerAction {
   position: GridPosition
 }
 
-const initialGrid = generateGrid();
+const initialGrid = initializeGrid();
 
 function gridReducer(grid: boolean[][], action: GridAction): boolean[][] {
   switch (action.type) {
@@ -48,7 +48,7 @@ function gridReducer(grid: boolean[][], action: GridAction): boolean[][] {
     case "deactivate_tile": {
       const newGrid = copy2DArray(grid);
       newGrid[action.position.row][action.position.col] = false;
-      return newGrid
+      return newGrid;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { GridPosition, useGrid, useGridDispatch } from "../state/GridProvider";
+import { GridPosition, useGrid, useGridDispatch } from "../state_providers/GridProvider";
 
 export function Grid() {
   const grid = useGrid();
@@ -6,7 +6,7 @@ export function Grid() {
 
   return (
     <ul className="flex flex-col gap-1 w-3/4 md:w-1/2 lg:w-1/3">
-      {grid.map((values, index) => <Row values={values} index={index}/>)}
+      {grid.map((values, index) => <Row values={values} index={index} key={index}/>)}
     </ul>
   )
 }
@@ -14,7 +14,7 @@ export function Grid() {
 function Row({ values, index: rowIndex }: { values: boolean[], index: number }) {
   return (
     <ul className="flex flex-1 gap-1">
-      {values.map((value, colIndex) => <Tile active={value} position={{row: rowIndex, col: colIndex}}/>)}
+      {values.map((value, colIndex) => <Tile active={value} position={{row: rowIndex, col: colIndex}} key={colIndex}/>)}
     </ul>
   )
 }
@@ -37,7 +37,7 @@ function Tile({ active, position }: TileProps) {
       // If user clicks on active tile, deactivate it
       gridDispatch({ type: "deactivate_tile", position: { row: position.row, col: position.col } })
     } else {
-      // If user clicks on inactive tile
+      // If user clicks on inactive tile,
     }
   }
 

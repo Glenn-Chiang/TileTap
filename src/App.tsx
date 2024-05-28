@@ -1,5 +1,5 @@
 import { Grid } from "./features/Game/components/Grid"
-import { GridProvider } from "./features/Game/state/GridProvider"
+import { GridProvider } from "./features/Game/state_providers/GridProvider"
 
 function App() {
   return (
