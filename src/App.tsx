@@ -1,10 +1,15 @@
 import { Grid } from "./features/Game/components/Grid"
+import { GridProvider } from "./features/Game/state/GridProvider"
 
 function App() {
   return (
     <main className="w-full flex flex-col items-center gap-4">
-      TileTap
-      <Grid/>
+      <h1 className="text-4xl p-4">
+        TileTap
+      </h1>
+      <GridProvider>
+        <Grid/>
+      </GridProvider>
     </main>
   )
 }
