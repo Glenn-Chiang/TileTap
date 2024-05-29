@@ -1,12 +1,14 @@
-import { GridPosition, useGrid, useGridDispatch } from "../state_providers/GridProvider";
+import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useCheckHit } from "../game_logic/game_logic";
+import { GridPosition } from "../reducers/grid";
 
 export function Grid() {
-  const grid = useGrid();
+  const grid = useAppSelector(state => state.grid);
   if (!grid) return <></>;
 
   return (
     <ul className="flex flex-col gap-1 w-3/4 md:w-1/2 lg:w-1/3">
-      {grid.map((values, index) => <Row values={values} index={index} key={index}/>)}
+      {grid.map((values, index) => <Row values={values} index={index} key={index} />)}
     </ul>
   )
 }
@@ -14,7 +16,7 @@ export function Grid() {
 function Row({ values, index: rowIndex }: { values: boolean[], index: number }) {
   return (
     <ul className="flex flex-1 gap-1">
-      {values.map((value, colIndex) => <Tile active={value} position={{row: rowIndex, col: colIndex}} key={colIndex}/>)}
+      {values.map((value, colIndex) => <Tile active={value} position={{ row: rowIndex, col: colIndex }} key={colIndex} />)}
     </ul>
   )
 }
@@ -28,20 +30,13 @@ function Tile({ active, position }: TileProps) {
   const activeColor = "bg-sky-500"
   const inactiveColor = "bg-white"
 
-  const gridDispatch = useGridDispatch();
+  const checkHit = useCheckHit();
 
   const handleClick = () => {
-    if (!gridDispatch) return;
-
-    if (active) {
-      // If user clicks on active tile, deactivate it
-      gridDispatch({ type: "deactivate_tile", position: { row: position.row, col: position.col } })
-    } else {
-      // If user clicks on inactive tile,
-    }
+    checkHit(position);
   }
 
   return (
-    <div onClick={handleClick} className={`flex flex-1 aspect-square rounded ${active ? activeColor : inactiveColor}`}></div>
+    <button onClick={handleClick} className={`flex flex-1 aspect-square rounded ${active ? activeColor : inactiveColor}`}></button>
   )
 }

@@ -1,5 +1,4 @@
 import { Grid } from "./features/Game/components/Grid"
-import { GridProvider } from "./features/Game/state_providers/GridProvider"
 
 function App() {
   return (
@@ -7,9 +6,7 @@ function App() {
       <h1 className="text-4xl p-4">
         TileTap
       </h1>
-      <GridProvider>
-        <Grid/>
-      </GridProvider>
+      <Grid />
     </main>
   )
 }
