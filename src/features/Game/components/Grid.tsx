@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useAppSelector } from "../../../redux_store/store";
 import { useCheckHit, useStartGame } from "../game_logic/game_logic";
-import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition } from "../reducers/grid";
 import { useGameState, useGrid } from "../reducers/selectors";
 import { GameOverDisplay } from "./GameOverDisplay";
