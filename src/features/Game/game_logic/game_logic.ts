@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
 import { GridPosition, gridSlice } from "../reducers/grid";
+import { scoreSlice } from "../reducers/score";
 
 export const numRows = 4;
 export const numCols = 4;
@@ -17,7 +18,7 @@ export function useCheckHit() {
       // Update grid
       dispatch(gridSlice.actions.onCorrectHit(position))
       // Update score, accuracy, combo etc
-
+      dispatch(scoreSlice.actions.increment())
     } else {
       // If user clicked on inactive tile
     }
