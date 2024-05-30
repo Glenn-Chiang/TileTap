@@ -6,7 +6,7 @@ import { gameStateSlice } from "../features/Game/reducers/gameState";
 
 export const store = configureStore({
   reducer: {
-    grid: gridSlice.reducer,
+    gridData: gridSlice.reducer,
     score: scoreSlice.reducer,
     gameState: gameStateSlice.reducer
   }

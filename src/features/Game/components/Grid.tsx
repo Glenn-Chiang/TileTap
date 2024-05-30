@@ -1,11 +1,12 @@
 import { useAppSelector } from "../../../redux_store/store";
 import { useCheckHit } from "../game_logic/game_logic";
 import { GridPosition } from "../reducers/grid";
+import { useGameState, useGrid } from "../reducers/selectors";
 import { GameOverDisplay } from "./GameOverDisplay";
 
 export function Grid() {
-  const grid = useAppSelector(state => state.grid);
-  const isGameOver = useAppSelector(state => state.gameState).stage === "post-game";
+  const grid = useGrid();
+  const isGameOver = useGameState().stage === "post-game"
 
   return (
     <div className="relative">
@@ -37,6 +38,7 @@ interface TileProps {
 function Tile({ active, position }: TileProps) {
   const activeColor = "bg-sky-500"
   const inactiveColor = "bg-white"
+  const wrongColor = "bg-red-500"
 
   const gameState = useAppSelector(state => state.gameState);
 
@@ -45,7 +47,11 @@ function Tile({ active, position }: TileProps) {
     checkHit(position);
   }
 
+  // If this tile was wrongly clicked, it will turn red
+  const wrongTilePosition = useAppSelector(state => state.gridData.wrongTile)
+  const wronglyClicked = position.row === wrongTilePosition?.row && position.col === wrongTilePosition.col;
+
   return (
-    <button disabled={gameState.stage === "post-game"} onClick={handleClick} className={`flex flex-1 aspect-square rounded ${active ? activeColor : inactiveColor}`}></button>
+    <button disabled={gameState.stage === "post-game"} onClick={handleClick} className={`flex flex-1 aspect-square rounded ${wronglyClicked ? wrongColor : active ? activeColor : inactiveColor}`}></button>
   )
 }

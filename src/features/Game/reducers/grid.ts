@@ -2,17 +2,24 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { randRange } from "../../../utils/randomUtils";
 import { numActiveTiles, numCols, numRows } from "../game_logic/game_logic";
 
-const initialState: boolean[][] = initializeGrid();
+const initialState: {grid: boolean[][], wrongTile: GridPosition | null} = {
+  grid: initializeGrid(),
+  wrongTile: null
+}
 
 export const gridSlice = createSlice({
   name: "grid",
   initialState,
   reducers: {
-    reset: () => initializeGrid(),
-    onCorrectHit: (grid, action: PayloadAction<GridPosition>) => {
+    reset: () => initialState,
+    onCorrectHit: (state, action: PayloadAction<GridPosition>) => {
+      const grid = state.grid
       const {row, col} = action.payload;
       activateRandomPosition(grid);
       grid[row][col] = false;
+    },
+    onWrongHit: (state, action: PayloadAction<GridPosition>) => {
+      state.wrongTile = action.payload
     }
   }
 })

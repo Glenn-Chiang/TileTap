@@ -1,7 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useAppDispatch } from "../../../redux_store/store";
 import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition, gridSlice } from "../reducers/grid";
 import { scoreSlice } from "../reducers/score";
+import { useGrid } from "../reducers/selectors";
 
 export const numRows = 4;
 export const numCols = 4;
@@ -9,7 +10,7 @@ export const numCols = 4;
 export const numActiveTiles = 4;
 
 export function useCheckHit() {
-  const grid = useAppSelector(state => state.grid)
+  const grid = useGrid();
   const dispatch = useAppDispatch();
 
   return (position: GridPosition) => {
@@ -22,6 +23,7 @@ export function useCheckHit() {
 
     } else {
       // If user clicked on inactive tile
+      dispatch(gridSlice.actions.onWrongHit(position))
       dispatch(gameStateSlice.actions.endGame())
     }
   }
