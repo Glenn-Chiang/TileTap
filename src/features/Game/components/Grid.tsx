@@ -1,5 +1,6 @@
-import { useAppSelector } from "../../../redux_store/store";
-import { useCheckHit } from "../game_logic/game_logic";
+import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useCheckHit, useStartGame } from "../game_logic/game_logic";
+import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition } from "../reducers/grid";
 import { useGameState, useGrid } from "../reducers/selectors";
 import { GameOverDisplay } from "./GameOverDisplay";
@@ -41,9 +42,13 @@ function Tile({ active, position }: TileProps) {
   const wrongColor = "bg-red-500"
 
   const gameState = useAppSelector(state => state.gameState);
-
   const checkHit = useCheckHit();
+  const startGame = useStartGame();
+
   const handleClick = () => {
+    if (gameState.stage === "pre-game") {
+      startGame();
+    }
     checkHit(position);
   }
 

@@ -8,6 +8,7 @@ export const numRows = 4;
 export const numCols = 4;
 // Number of tiles that are active at any time
 export const numActiveTiles = 4;
+export const timeLimit = 5
 
 export function useCheckHit() {
   const grid = useGrid();
@@ -29,11 +30,25 @@ export function useCheckHit() {
   }
 }
 
+export function useStartGame() {
+  const dispatch = useAppDispatch();
+  return () => {
+    dispatch(gameStateSlice.actions.startGame())
+  }
+}
+
 export function useResetGame() {
   const dispatch = useAppDispatch();
   return () => {
     dispatch(gameStateSlice.actions.restartGame())
     dispatch(gridSlice.actions.reset());
     dispatch(scoreSlice.actions.reset());
+  }
+}
+
+export function useEndGame() {
+  const dispatch = useAppDispatch();
+  return () => {
+    dispatch(gameStateSlice.actions.endGame())
   }
 }

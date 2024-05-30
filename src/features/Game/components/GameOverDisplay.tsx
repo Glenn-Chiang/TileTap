@@ -1,6 +1,6 @@
 export function GameOverDisplay() {
   return (
-    <div className="text-2xl text-red-500">
+    <div className="text-2xl">
       GAME OVER
     </div>
   )
