@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition, gridSlice } from "../reducers/grid";
 import { scoreSlice } from "../reducers/score";
 
@@ -18,8 +19,10 @@ export function useCheckHit() {
       dispatch(gridSlice.actions.onCorrectHit(position))
       // Update score, accuracy, combo etc
       dispatch(scoreSlice.actions.increment())
+
     } else {
       // If user clicked on inactive tile
+      dispatch(gameStateSlice.actions.endGame())
     }
   }
 }
@@ -27,6 +30,7 @@ export function useCheckHit() {
 export function useResetGame() {
   const dispatch = useAppDispatch();
   return () => {
+    dispatch(gameStateSlice.actions.restartGame())
     dispatch(gridSlice.actions.reset());
     dispatch(scoreSlice.actions.reset());
   }

@@ -30,13 +30,14 @@ function Tile({ active, position }: TileProps) {
   const activeColor = "bg-sky-500"
   const inactiveColor = "bg-white"
 
-  const checkHit = useCheckHit();
+  const gameState = useAppSelector(state => state.gameState);
 
+  const checkHit = useCheckHit();
   const handleClick = () => {
     checkHit(position);
   }
 
   return (
-    <button onClick={handleClick} className={`flex flex-1 aspect-square rounded ${active ? activeColor : inactiveColor}`}></button>
+    <button disabled={gameState.stage === "post-game"} onClick={handleClick} className={`flex flex-1 aspect-square rounded ${active ? activeColor : inactiveColor}`}></button>
   )
 }
