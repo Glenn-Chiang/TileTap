@@ -12,7 +12,8 @@ export const scoreSlice = createSlice(
     reducers: {
       increment: (state) => {
         state.score += state.multiplier;
-      }
+      },
+      reset: () => initialState
     }
   }
 )

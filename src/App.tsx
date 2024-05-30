@@ -1,5 +1,6 @@
 import { Dashboard } from "./features/Game/components/Dashboard"
 import { Grid } from "./features/Game/components/Grid"
+import { RestartButton } from "./features/Game/components/RestartButton"
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <div className="w-4/5 md:w-1/2 lg:w-1/3 flex flex-col gap-4">
         <Dashboard/>
         <Grid />
+        <RestartButton/>
       </div>
     </main>
   )

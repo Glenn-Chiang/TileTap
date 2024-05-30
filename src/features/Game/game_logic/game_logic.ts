@@ -9,7 +9,6 @@ export const numActiveTiles = 4;
 
 export function useCheckHit() {
   const grid = useAppSelector(state => state.grid)
-
   const dispatch = useAppDispatch();
 
   return (position: GridPosition) => {
@@ -22,5 +21,13 @@ export function useCheckHit() {
     } else {
       // If user clicked on inactive tile
     }
+  }
+}
+
+export function useResetGame() {
+  const dispatch = useAppDispatch();
+  return () => {
+    dispatch(gridSlice.actions.reset());
+    dispatch(scoreSlice.actions.reset());
   }
 }
