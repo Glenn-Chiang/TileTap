@@ -1,15 +1,23 @@
 import { useAppSelector } from "../../../redux_store/store";
 import { useCheckHit } from "../game_logic/game_logic";
 import { GridPosition } from "../reducers/grid";
+import { GameOverDisplay } from "./GameOverDisplay";
 
 export function Grid() {
   const grid = useAppSelector(state => state.grid);
-  if (!grid) return <></>;
+  const isGameOver = useAppSelector(state => state.gameState).stage === "post-game";
 
   return (
-    <ul className="flex flex-col gap-1">
-      {grid.map((values, index) => <Row values={values} index={index} key={index} />)}
-    </ul>
+    <div className="relative">
+      <ul className={`flex flex-col gap-1 ${isGameOver && "opacity-50"}`}>
+        {grid.map((values, index) => <Row values={values} index={index} key={index} />)}
+      </ul>
+      {isGameOver &&
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <GameOverDisplay />
+        </div>
+      }
+    </div>
   )
 }
 
