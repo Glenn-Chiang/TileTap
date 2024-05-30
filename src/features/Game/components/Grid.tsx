@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useAppSelector } from "../../../redux_store/store";
 import { useCheckHit } from "../game_logic/game_logic";
 import { GridPosition } from "../reducers/grid";
 
@@ -7,7 +7,7 @@ export function Grid() {
   if (!grid) return <></>;
 
   return (
-    <ul className="flex flex-col gap-1 w-3/4 md:w-1/2 lg:w-1/3">
+    <ul className="flex flex-col gap-1">
       {grid.map((values, index) => <Row values={values} index={index} key={index} />)}
     </ul>
   )
