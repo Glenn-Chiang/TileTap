@@ -56,6 +56,11 @@ function Tile({ active, position }: TileProps) {
   const wronglyClicked = position.row === wrongTilePosition?.row && position.col === wrongTilePosition.col;
 
   return (
-    <button disabled={gameState.stage === "post-game"} onClick={handleClick} className={`flex flex-1 aspect-square rounded ${wronglyClicked ? wrongColor : active ? activeColor : inactiveColor}`}></button>
+    <button 
+      disabled={gameState.stage === "post-game"} 
+      onClick={handleClick} 
+      className={`flex flex-1 aspect-square rounded ${wronglyClicked ? wrongColor : active ? activeColor : inactiveColor}`}>
+
+    </button>
   )
 }

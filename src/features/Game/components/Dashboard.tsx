@@ -1,11 +1,12 @@
 import { useAppSelector } from "../../../redux_store/store"
-import { timeLimit } from "../game_logic/game_logic";
 import { useGameState } from "../reducers/selectors";
+import { selectTimer } from "../reducers/timer";
 import { Timer } from "./Timer";
 
 export function Dashboard() {
   const scoreState = useAppSelector(state => state.score);
   const gameState = useGameState();
+  const timeLimit = useAppSelector(selectTimer).timeLimit;
 
   return (
     <div className="bg-white rounded p-2 text-xl flex justify-between">

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { timeLimit, useEndGame } from "../game_logic/game_logic";
+import { useEndGame } from "../game_logic/game_logic";
 import { useGameState } from "../reducers/selectors";
+import { useAppSelector } from "../../../redux_store/store";
+import { selectTimer } from "../reducers/timer";
 
 export function Timer() {
+  const timeLimit = useAppSelector(selectTimer).timeLimit;
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const endGame = useEndGame();
   const gameState = useGameState();

@@ -4,12 +4,6 @@ import { GridPosition, gridSlice } from "../reducers/grid";
 import { scoreSlice } from "../reducers/score";
 import { useGrid } from "../reducers/selectors";
 
-export const numRows = 4;
-export const numCols = 4;
-// Number of tiles that are active at any time
-export const numActiveTiles = 4;
-export const timeLimit = 5
-
 export function useCheckHit() {
   const grid = useGrid();
   const dispatch = useAppDispatch();

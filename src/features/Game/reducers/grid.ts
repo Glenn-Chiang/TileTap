@@ -1,40 +1,56 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { randRange } from "../../../utils/randomUtils";
-import { numActiveTiles, numCols, numRows } from "../game_logic/game_logic";
+import { gridSizes } from "../game_logic/constants";
 
-const initialState: {grid: boolean[][], wrongTile: GridPosition | null} = {
-  grid: initializeGrid(),
-  wrongTile: null
+export interface GridPosition {
+  row: number;
+  col: number;
 }
+
+interface GridState {
+  gridSize: number;
+  numActiveTiles: number;
+  grid: boolean[][];
+  wrongTile: GridPosition | null;
+}
+
+const initialState: GridState = {
+  gridSize: gridSizes[0],
+  get numActiveTiles() {
+    return this.gridSize;
+  },
+  grid: initializeGrid(gridSizes[0], gridSizes[0]),
+  wrongTile: null,
+};
 
 export const gridSlice = createSlice({
   name: "grid",
   initialState,
   reducers: {
-    reset: () => initialState,
+    reset: (state) => {
+      initializeGrid(state.gridSize, state.numActiveTiles);
+    },
     onCorrectHit: (state, action: PayloadAction<GridPosition>) => {
-      const grid = state.grid
-      const {row, col} = action.payload;
+      const grid = state.grid;
+      const { row, col } = action.payload;
       activateRandomPosition(grid);
       grid[row][col] = false;
     },
     onWrongHit: (state, action: PayloadAction<GridPosition>) => {
-      state.wrongTile = action.payload
-    }
-  }
-})
+      state.wrongTile = action.payload;
+    },
+  },
+});
 
-export interface GridPosition {
-  row: number,
-  col: number
-}
-
-export function initializeGrid(): boolean[][] {
-  const grid = Array.from({ length: numRows }, () =>
-    new Array(numCols).fill(false)
+export function initializeGrid(
+  gridSize: number,
+  numActive: number
+): boolean[][] {
+  const grid = Array.from({ length: gridSize }, () =>
+    new Array(gridSize).fill(false)
   );
   // Randomly set given number of tiles as active
-  for (let i = 0; i < numActiveTiles; i++) {
+  for (let i = 0; i < numActive; i++) {
     activateRandomPosition(grid);
   }
   return grid;
@@ -42,6 +58,8 @@ export function initializeGrid(): boolean[][] {
 
 // Activate a random positon on the grid that is not already active
 export function activateRandomPosition(grid: boolean[][]) {
+  const numRows = grid.length;
+  const numCols = grid[0].length;
   let row = randRange(0, numRows);
   let col = randRange(0, numCols);
   while (grid[row][col]) {
