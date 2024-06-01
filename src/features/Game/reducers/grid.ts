@@ -27,9 +27,6 @@ export const gridSlice = createSlice({
   name: "grid",
   initialState,
   reducers: {
-    reset: (state) => {
-      initializeGrid(state.gridSize, state.numActiveTiles);
-    },
     onCorrectHit: (state, action: PayloadAction<GridPosition>) => {
       const grid = state.grid;
       const { row, col } = action.payload;
@@ -39,6 +36,12 @@ export const gridSlice = createSlice({
     onWrongHit: (state, action: PayloadAction<GridPosition>) => {
       state.wrongTile = action.payload;
     },
+    reset: (state) => {
+      initializeGrid(state.gridSize, state.numActiveTiles);
+    },
+    setGridSize: (state, action: PayloadAction<number>) => {
+      state.gridSize = action.payload;
+    }
   },
 });
 
