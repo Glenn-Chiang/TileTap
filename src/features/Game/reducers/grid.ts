@@ -38,7 +38,8 @@ export const gridSlice = createSlice({
       state.wrongTile = action.payload;
     },
     reset: (state) => {
-      initializeGrid(state.gridSize, state.numActiveTiles);
+      state.grid = initializeGrid(state.gridSize, state.numActiveTiles);
+      state.wrongTile = null;
     },
     setGridSize: (state, action: PayloadAction<number>) => {
       state.gridSize = action.payload;
