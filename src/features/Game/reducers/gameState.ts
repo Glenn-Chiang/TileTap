@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../../redux_store/store";
 
 type GameStage = "pre-game" | "in-game" | "post-game";
 
@@ -21,3 +22,5 @@ export const gameStateSlice = createSlice({
     },
   },
 });
+
+export const selectGameState = (state: RootState) => state.gameState;

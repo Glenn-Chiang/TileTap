@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { RootState } from "../../../redux_store/store";
 
 const initialState = {
   score: 0,
@@ -17,3 +18,5 @@ export const scoreSlice = createSlice(
     }
   }
 )
+
+export const selectScore = (state: RootState) => state.score;

@@ -1,11 +1,12 @@
 import { useAppSelector } from "../../../redux_store/store"
-import { useGameState } from "../reducers/selectors";
+import { selectGameState } from "../reducers/gameState";
+import { selectScore } from "../reducers/score";
 import { selectTimer } from "../reducers/timer";
 import { Timer } from "./Timer";
 
 export function Dashboard() {
-  const scoreState = useAppSelector(state => state.score);
-  const gameState = useGameState();
+  const scoreState = useAppSelector(selectScore);
+  const gameState = useAppSelector(selectGameState);
   const timeLimit = useAppSelector(selectTimer).timeLimit;
 
   return (

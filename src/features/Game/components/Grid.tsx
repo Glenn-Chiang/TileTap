@@ -1,12 +1,12 @@
 import { useAppSelector } from "../../../redux_store/store";
 import { useCheckHit, useStartGame } from "../game_logic/game_logic";
-import { GridPosition } from "../reducers/grid";
-import { useGameState, useGrid } from "../reducers/selectors";
+import { selectGameState } from "../reducers/gameState";
+import { GridPosition, selectGrid } from "../reducers/grid";
 import { GameOverDisplay } from "./GameOverDisplay";
 
 export function Grid() {
-  const grid = useGrid();
-  const isGameOver = useGameState().stage === "post-game"
+  const grid = useAppSelector(selectGrid).grid;
+  const isGameOver = useAppSelector(selectGameState).stage === "post-game"
 
   return (
     <div className="relative">

@@ -1,11 +1,10 @@
-import { useAppDispatch } from "../../../redux_store/store";
+import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
 import { gameStateSlice } from "../reducers/gameState";
-import { GridPosition, gridSlice } from "../reducers/grid";
+import { GridPosition, gridSlice, selectGrid } from "../reducers/grid";
 import { scoreSlice } from "../reducers/score";
-import { useGrid } from "../reducers/selectors";
 
 export function useCheckHit() {
-  const grid = useGrid();
+  const grid = useAppSelector(selectGrid).grid
   const dispatch = useAppDispatch();
 
   return (position: GridPosition) => {
