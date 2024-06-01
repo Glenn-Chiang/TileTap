@@ -11,7 +11,7 @@ function App() {
         </Link>
         <div className="flex gap-2">
           <NavTab to="/settings" icon={faGear}/>
-          <NavTab to="/stats" icon={faChartLine}/>
+          <NavTab to="/scores" icon={faChartLine}/>
         </div>
       </nav>
       <div className="w-full flex flex-col gap-4">

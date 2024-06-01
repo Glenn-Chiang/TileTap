@@ -7,6 +7,7 @@ import { store } from './redux_store/store.ts'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { SettingsMenu } from './features/Settings/components/SettingsMenu.tsx'
 import { Game } from './features/Game/components/Game.tsx'
+import { ScoresPage } from './features/Scores/components/ScoresPage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <SettingsMenu/>
+      },
+      {
+        path: "/scores",
+        element: <ScoresPage/>
       }
     ]
   },
