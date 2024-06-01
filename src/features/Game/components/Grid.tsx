@@ -44,7 +44,8 @@ function Tile({ active, position }: TileProps) {
   const checkHit = useCheckHit();
   const startGame = useStartGame();
 
-  const handleClick = () => {
+  const handleClick: React.MouseEventHandler = (event) => {
+    event.preventDefault()
     if (gameState.stage === "pre-game") {
       startGame();
     }
@@ -60,7 +61,6 @@ function Tile({ active, position }: TileProps) {
       disabled={gameState.stage === "post-game"} 
       onMouseDown={handleClick} 
       className={`flex flex-1 aspect-square rounded ${wronglyClicked ? wrongColor : active ? activeColor : inactiveColor}`}>
-
     </button>
   )
 }

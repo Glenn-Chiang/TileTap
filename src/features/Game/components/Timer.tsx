@@ -11,7 +11,6 @@ export function Timer() {
   const gameState = useAppSelector(selectGameState)
 
   useEffect(() => {
-   
     if (timeLeft <= 0) {
       endGame()
       return;

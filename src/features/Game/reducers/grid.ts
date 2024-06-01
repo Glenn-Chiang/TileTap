@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { randRange } from "../../../utils/randomUtils";
-import { gridSizes } from "../game_logic/constants";
+import { gridSizes, numActiveTiles } from "../game_logic/constants";
 import { RootState } from "../../../redux_store/store";
 
 export interface GridPosition {
@@ -10,17 +10,13 @@ export interface GridPosition {
 
 interface GridState {
   gridSize: number;
-  numActiveTiles: number;
   grid: boolean[][];
   wrongTile: GridPosition | null;
 }
 
 const initialState: GridState = {
   gridSize: gridSizes[0],
-  get numActiveTiles() {
-    return this.gridSize;
-  },
-  grid: initializeGrid(gridSizes[0], gridSizes[0]),
+  grid: initializeGrid(gridSizes[0], numActiveTiles),
   wrongTile: null,
 };
 
@@ -38,12 +34,12 @@ export const gridSlice = createSlice({
       state.wrongTile = action.payload;
     },
     reset: (state) => {
-      state.grid = initializeGrid(state.gridSize, state.numActiveTiles);
+      state.grid = initializeGrid(state.gridSize, numActiveTiles);
       state.wrongTile = null;
     },
     setGridSize: (state, action: PayloadAction<number>) => {
       state.gridSize = action.payload;
-      state.grid = initializeGrid(state.gridSize, state.numActiveTiles)
+      state.grid = initializeGrid(state.gridSize, numActiveTiles)
     }
   },
 });
