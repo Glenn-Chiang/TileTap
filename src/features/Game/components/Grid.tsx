@@ -58,7 +58,7 @@ function Tile({ active, position }: TileProps) {
   return (
     <button 
       disabled={gameState.stage === "post-game"} 
-      onClick={handleClick} 
+      onMouseDown={handleClick} 
       className={`flex flex-1 aspect-square rounded ${wronglyClicked ? wrongColor : active ? activeColor : inactiveColor}`}>
 
     </button>
