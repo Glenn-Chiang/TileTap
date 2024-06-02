@@ -9,7 +9,7 @@ interface DropdownProps<T extends OptionValue> {
   icon?: IconDefinition;
   options: T[];
   value: T;
-  onChange: (value: T) => void;
+  onChange: (value: string) => void;
   displayer?: (value: T) => string; // Function that determines how to display the value
 }
 
@@ -22,8 +22,7 @@ export function Dropdown<TOptionValue extends OptionValue>({
   displayer,
 }: DropdownProps<TOptionValue>) {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value as TOptionValue;
-    onChange(selectedValue);
+    onChange(event.target.value);
   };
 
   return (

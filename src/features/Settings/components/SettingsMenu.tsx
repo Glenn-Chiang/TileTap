@@ -33,7 +33,7 @@ export function SettingsMenu() {
           icon={faChessBoard}
           options={gridSizes}
           value={gridSize}
-          onChange={setGridSize}
+          onChange={(value) => setGridSize(Number(value))}
           displayer={displayGridSize}
         />
       </div>
@@ -43,7 +43,7 @@ export function SettingsMenu() {
           icon={faClock}
           options={timeLimits}
           value={timeLimit}
-          onChange={setTimeLimit}
+          onChange={(value) => setTimeLimit(Number(value))}
           displayer={displayTimeLimit}
         />
       </div>

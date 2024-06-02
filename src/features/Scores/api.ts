@@ -1,6 +1,6 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../database/db";
-import { GameData, SortOrder } from "./types";
+import { GameData } from "./types";
 
 export async function addGameRecord(gameData: GameData) {
   const { gridSize, timeLimit, score } = gameData;
@@ -15,15 +15,20 @@ export async function addGameRecord(gameData: GameData) {
 export function useGameRecords(
   gridSize: number,
   timeLimit: number,
-  sortOrder: SortOrder
+  sortOrder: string
 ) {
+  if (sortOrder != "score" && sortOrder != "date") {
+    throw new Error("Invalid sort order")
+  }
   return useLiveQuery(async () => {
-    return await db.gameRecords
+    console.log(typeof gridSize);
+    const records = await db.gameRecords
       .where("gridSize")
       .equals(gridSize)
       .and((gameRecord) => gameRecord.timeLimit === timeLimit)
       .reverse()
-      .limit(10)
       .sortBy(sortOrder);
-  }, [gridSize, timeLimit]);
+    return records;
+  }, [gridSize, timeLimit, sortOrder])
 }
+

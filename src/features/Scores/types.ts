@@ -9,4 +9,3 @@ export interface GameRecord extends GameData {
   date: Date;
 }
 
-export type SortOrder = "score" | "date"
