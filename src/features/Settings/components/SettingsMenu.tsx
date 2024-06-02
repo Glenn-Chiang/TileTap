@@ -25,7 +25,7 @@ export function SettingsMenu() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <IconLabel icon={faGear} label="Settings" />
       <div className="bg-white rounded p-2">
         <Dropdown

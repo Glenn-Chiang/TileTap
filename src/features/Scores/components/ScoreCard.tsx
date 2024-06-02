@@ -6,7 +6,7 @@ export function ScoreCard({ gameRecord }: { gameRecord: GameRecord }) {
 
   return (
     <div className="bg-white rounded p-2 flex ">
-      <div className="flex flex-col items-center w-1/2 text-slate-500">
+      <div className="flex flex-col items-center w-1/2">
         <div className="flex gap-1 items-center">
           <GridIcon />
           <span>{`${gridSize} x ${gridSize}`}</span>

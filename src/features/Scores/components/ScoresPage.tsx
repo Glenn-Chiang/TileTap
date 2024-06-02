@@ -1,4 +1,8 @@
-import { faChessBoard, faClock, faSortAmountDesc } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChessBoard,
+  faClock,
+  faSortAmountDesc,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Dropdown } from "../../../components/Dropdown";
 import { displayGridSize } from "../../../utils/textDisplay";
@@ -16,36 +20,30 @@ export function ScoresPage() {
 
   return (
     <>
-      <div>
-        <div>
-          <Dropdown
-            label="Grid size"
-            icon={faChessBoard}
-            options={gridSizes}
-            value={gridSize}
-            onChange={(value) => setGridSize(value)}
-            displayer={displayGridSize}
-          />
-        </div>
-        <div>
-          <Dropdown
-            label="Time limit"
-            icon={faClock}
-            options={timeLimits}
-            value={timeLimit}
-            onChange={(value) => setTimeLimit(value)}
-            displayer={displayGridSize}
-          />
-        </div>
-        <div>
-          <Dropdown
-            label="Sort by"
-            icon={faSortAmountDesc}
-            options={["date", "score"]}
-            value={sortOrder}
-            onChange={(value) => setSortOrder(value)}
-          />
-        </div>
+      <div className="bg-white rounded p-2 flex flex-col gap-2">
+        <Dropdown
+          label="Grid size"
+          icon={faChessBoard}
+          options={gridSizes}
+          value={gridSize}
+          onChange={(value) => setGridSize(value)}
+          displayer={displayGridSize}
+        />
+        <Dropdown
+          label="Time limit"
+          icon={faClock}
+          options={timeLimits}
+          value={timeLimit}
+          onChange={(value) => setTimeLimit(value)}
+          displayer={displayGridSize}
+        />
+        <Dropdown
+          label="Sort by"
+          icon={faSortAmountDesc}
+          options={["date", "score"]}
+          value={sortOrder}
+          onChange={(value) => setSortOrder(value)}
+        />
       </div>
       <ul className="flex flex-col gap-4 ">
         {gameRecords?.map((record) => (
