@@ -11,6 +11,7 @@ interface DropdownProps<T extends OptionValue> {
   value: T;
   onChange: (value: string) => void;
   displayer?: (value: T) => string; // Function that determines how to display the value
+  disabled?: boolean
 }
 
 export function Dropdown<TOptionValue extends OptionValue>({
@@ -20,6 +21,7 @@ export function Dropdown<TOptionValue extends OptionValue>({
   options,
   onChange,
   displayer,
+  disabled = false
 }: DropdownProps<TOptionValue>) {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onChange(event.target.value);
@@ -30,7 +32,7 @@ export function Dropdown<TOptionValue extends OptionValue>({
       <label>
         <IconLabel icon={icon} label={label}/>
       </label>
-      <select onChange={handleChange} value={value}>
+      <select onChange={handleChange} value={value} disabled={disabled}>
         {options.map((option) => (
           <option value={option} key={option}>
             {displayer ? displayer(option) : option}
