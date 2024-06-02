@@ -13,7 +13,7 @@ export function ScoresPage() {
 
   return (
     <>
-      <ul>
+      <ul className="flex flex-col gap-4 ">
         {gameRecords?.map((record) => (
           <ScoreCard gameRecord={record} />
         ))}

@@ -1,14 +1,25 @@
+import { GridIcon, TimeIcon } from "../../../components/icons";
 import { GameRecord } from "../types";
 
-export function ScoreCard({ gameRecord }: { gameRecord: GameRecord}) {
+export function ScoreCard({ gameRecord }: { gameRecord: GameRecord }) {
   const { date, gridSize, timeLimit, score } = gameRecord;
 
   return (
-    <div className="bg-white rounded flex flex-col">
-      <span>{`${gridSize} x ${gridSize}`}</span>
-      <span>{`${timeLimit}s`}</span>
-      <span>{date.toLocaleDateString()}</span>
-      <span>{score}</span>
+    <div className="bg-white rounded p-2 flex ">
+      <div className="flex flex-col items-center w-1/2 text-slate-500">
+        <div className="flex gap-1 items-center">
+          <GridIcon />
+          <span>{`${gridSize} x ${gridSize}`}</span>
+        </div>
+        <div className="flex gap-1 items-center">
+          <TimeIcon />
+          <span>{`${timeLimit}s`}</span>
+        </div>
+        <span>{date.toLocaleDateString()}</span>
+      </div>
+      <div className="w-1/2 border-l-2 flex justify-center items-center text-3xl text-sky-500">
+        {score}
+      </div>
     </div>
   );
 }
