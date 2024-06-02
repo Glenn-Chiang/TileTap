@@ -1,4 +1,4 @@
-import { IconDefinition, faChartLine, faGear } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
@@ -9,12 +9,9 @@ function App() {
         <Link to={"/"}>
           <h1 className="text-3xl">TileTap</h1>
         </Link>
-        <div className="flex gap-2">
-          <NavTab to="/settings" icon={faGear}/>
-          <NavTab to="/scores" icon={faChartLine}/>
-        </div>
+        <NavTab to="/scores" icon={faChartLine} />
       </nav>
-      <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4 pb-10">
         <Outlet />
       </div>
     </main>
@@ -22,18 +19,25 @@ function App() {
 }
 
 interface NavTabProps {
-  to: string,
-  icon?: IconDefinition,
-  label?: string
+  to: string;
+  icon?: IconDefinition;
+  label?: string;
 }
 
-function NavTab({to, icon, label}: NavTabProps) {
+function NavTab({ to, icon, label }: NavTabProps) {
   return (
-    <NavLink to={to} className={({isActive}) => `flex gap items-center p-1 ${isActive ? "text-sky-500 " : "text-slate-500 "}`}>
-      {icon && <FontAwesomeIcon icon={icon}/>}
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `flex gap items-center p-1 ${
+          isActive ? "text-sky-500 " : "text-slate-500 "
+        }`
+      }
+    >
+      {icon && <FontAwesomeIcon icon={icon} />}
       {label && <span>{label}</span>}
     </NavLink>
-  )
+  );
 }
 
 export default App;

@@ -1,10 +1,15 @@
-import { faChessBoard, faClock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChessBoard,
+  faClock,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
 import { Dropdown } from "../../../components/Dropdown";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { displayGridSize, displayTimeLimit } from "../../../utils/textDisplay";
 import { gridSizes, timeLimits } from "../../Game/game_logic/constants";
 import { gridSlice, selectGrid } from "../../Game/reducers/grid";
 import { selectTimer, timerSlice } from "../../Game/reducers/timer";
+import { IconLabel } from "../../../components/IconLabel";
 
 export function SettingsMenu() {
   const dispatch = useAppDispatch();
@@ -20,7 +25,8 @@ export function SettingsMenu() {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <IconLabel icon={faGear} label="Settings" />
       <div className="bg-white rounded p-2">
         <Dropdown
           label="Grid size"
@@ -41,6 +47,6 @@ export function SettingsMenu() {
           displayer={displayTimeLimit}
         />
       </div>
-    </>
+    </div>
   );
 }

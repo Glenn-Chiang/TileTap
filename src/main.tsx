@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
 import { Provider } from 'react-redux'
-import { store } from './store/store.ts'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { SettingsMenu } from './features/Settings/components/SettingsMenu.tsx'
-import { Game } from './features/Game/components/Game.tsx'
+import App from './App.tsx'
 import { ScoresPage } from './features/Scores/components/ScoresPage.tsx'
+import './index.css'
+import { store } from './store/store.ts'
+import { GamePage } from './features/Game/components/GamePage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -16,11 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Game/>
-      },
-      {
-        path: "/settings",
-        element: <SettingsMenu/>
+        element: <GamePage/>
       },
       {
         path: "/scores",
