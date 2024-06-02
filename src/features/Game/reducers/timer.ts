@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { timeLimits } from "../game_logic/constants";
-import { RootState } from "../../../redux_store/store";
+import { RootState } from "../../../store/store";
 
 const initialState = {
   timeLimit: timeLimits[0],

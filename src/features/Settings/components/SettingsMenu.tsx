@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { gridSizes, timeLimits } from "../../Game/game_logic/constants";
 import { gridSlice, selectGrid } from "../../Game/reducers/grid";
 import { selectTimer, timerSlice } from "../../Game/reducers/timer";

@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../redux_store/store";
+import { useAppSelector } from "../../../store/store";
 import { useCheckHit, useStartGame } from "../game_logic/game_logic";
 import { selectGameState } from "../reducers/gameState";
 import { GridPosition, selectGrid } from "../reducers/grid";

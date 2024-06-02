@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../../redux_store/store";
+import { RootState } from "../../../store/store";
 
 type GameStage = "pre-game" | "in-game" | "post-game";
 

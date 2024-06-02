@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../redux_store/store"
+import { useAppSelector } from "../../../store/store"
 import { selectGameState } from "../reducers/gameState";
 import { selectScore } from "../reducers/score";
 import { selectTimer } from "../reducers/timer";

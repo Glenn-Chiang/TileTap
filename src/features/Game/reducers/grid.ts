@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { randRange } from "../../../utils/randomUtils";
 import { gridSizes, numActiveTiles } from "../game_logic/constants";
-import { RootState } from "../../../redux_store/store";
+import { RootState } from "../../../store/store";
 
 export interface GridPosition {
   row: number;

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../../redux_store/store";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition, gridSlice, selectGrid } from "../reducers/grid";
 import { scoreSlice, selectScore } from "../reducers/score";

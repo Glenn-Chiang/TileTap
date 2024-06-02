@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useEndGame } from "../game_logic/game_logic";
-import { useAppSelector } from "../../../redux_store/store";
+import { useAppSelector } from "../../../store/store";
 import { selectTimer } from "../reducers/timer";
 import { selectGameState } from "../reducers/gameState";
 
