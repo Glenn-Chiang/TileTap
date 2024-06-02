@@ -1,5 +1,7 @@
-import React from "react";
+import { faChessBoard, faClock } from "@fortawesome/free-solid-svg-icons";
+import { Dropdown } from "../../../components/Dropdown";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { displayGridSize, displayTimeLimit } from "../../../utils/textDisplay";
 import { gridSizes, timeLimits } from "../../Game/game_logic/constants";
 import { gridSlice, selectGrid } from "../../Game/reducers/grid";
 import { selectTimer, timerSlice } from "../../Game/reducers/timer";
@@ -8,59 +10,37 @@ export function SettingsMenu() {
   const dispatch = useAppDispatch();
 
   const gridSize = useAppSelector(selectGrid).gridSize;
-  const setGridSize: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    dispatch(gridSlice.actions.setGridSize(Number(event.target.value)));
+  const setGridSize = (gridSize: number) => {
+    dispatch(gridSlice.actions.setGridSize(gridSize));
   };
 
   const timeLimit = useAppSelector(selectTimer).timeLimit;
-  const setTimeLimit: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    dispatch(timerSlice.actions.setTimeLimit(Number(event.target.value)));
+  const setTimeLimit = (timeLimit: number) => {
+    dispatch(timerSlice.actions.setTimeLimit(timeLimit));
   };
 
   return (
     <>
-      <div className="bg-white rounded p-2 flex justify-between">
-        Grid size
-        <SettingDropdown
+      <div className="bg-white rounded p-2">
+        <Dropdown
+          label="Grid size"
+          icon={faChessBoard}
           options={gridSizes}
           value={gridSize}
-          changeHandler={setGridSize}
-          displayer={(gridSize: number) => `${gridSize} x ${gridSize}`}
+          onChange={setGridSize}
+          displayer={displayGridSize}
         />
       </div>
-      <div className="bg-white rounded p-2 flex justify-between">
-        Time limit
-        <SettingDropdown
+      <div className="bg-white rounded p-2">
+        <Dropdown
+          label="Time limit"
+          icon={faClock}
           options={timeLimits}
           value={timeLimit}
-          changeHandler={setTimeLimit}
-          displayer={(time: number) => `${time}s`}
+          onChange={setTimeLimit}
+          displayer={displayTimeLimit}
         />
       </div>
     </>
-  );
-}
-
-interface DropdownProps {
-  options: number[];
-  value: number;
-  changeHandler: React.ChangeEventHandler;
-  displayer?: (value: number) => string; // Function that determines how to display the value
-}
-
-function SettingDropdown({
-  value,
-  options,
-  changeHandler,
-  displayer,
-}: DropdownProps) {
-  return (
-    <select onChange={changeHandler} value={value}>
-      {options.map((option) => (
-        <option value={option} key={option}>
-          {displayer ? displayer(option) : option}
-        </option>
-      ))}
-    </select>
   );
 }

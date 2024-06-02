@@ -50,9 +50,7 @@ export function initializeGrid(
   gridSize: number,
   numActive: number
 ): boolean[][] {
-  const grid = Array.from({ length: gridSize }, () =>
-    new Array(gridSize).fill(false)
-  );
+  const grid = Array.from({ length: gridSize }, () => Array.from({length: gridSize}, () => false))
   // Randomly set given number of tiles as active
   for (let i = 0; i < numActive; i++) {
     activateRandomPosition(grid);

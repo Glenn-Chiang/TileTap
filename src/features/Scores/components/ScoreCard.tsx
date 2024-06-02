@@ -1,5 +1,5 @@
-import { GridIcon, TimeIcon } from "../../../components/icons";
 import { GameRecord } from "../types";
+import { GridIcon, TimeIcon } from "../../../components/icons";
 
 export function ScoreCard({ gameRecord }: { gameRecord: GameRecord }) {
   const { date, gridSize, timeLimit, score } = gameRecord;
