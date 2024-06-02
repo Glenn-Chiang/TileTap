@@ -15,20 +15,26 @@ export async function addGameRecord(gameData: GameData) {
 export function useGameRecords(
   gridSize: number,
   timeLimit: number,
-  sortOrder: string
+  sortOrder: string,
+  limit?: number,
+  startIndex: number = 0,
 ) {
   if (sortOrder != "score" && sortOrder != "date") {
     throw new Error("Invalid sort order")
   }
   return useLiveQuery(async () => {
-    console.log(typeof gridSize);
     const records = await db.gameRecords
       .where("gridSize")
       .equals(gridSize)
       .and((gameRecord) => gameRecord.timeLimit === timeLimit)
       .reverse()
-      .sortBy(sortOrder);
-    return records;
-  }, [gridSize, timeLimit, sortOrder])
+      .sortBy(sortOrder)
+
+      if (limit) {
+        return records.slice(startIndex, startIndex + limit)
+      } else {
+        return records
+      }
+  }, [gridSize, timeLimit, sortOrder, startIndex, limit])
 }
 

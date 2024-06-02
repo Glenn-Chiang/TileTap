@@ -34,7 +34,7 @@ function NavTab({ to, icon, label }: NavTabProps) {
         }`
       }
     >
-      {icon && <FontAwesomeIcon icon={icon} />}
+      {icon && <FontAwesomeIcon icon={icon} className="text-2xl"/>}
       {label && <span>{label}</span>}
     </NavLink>
   );

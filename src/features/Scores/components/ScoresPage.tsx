@@ -1,5 +1,7 @@
 import {
   faChessBoard,
+  faChevronLeft,
+  faChevronRight,
   faClock,
   faSortAmountDesc,
 } from "@fortawesome/free-solid-svg-icons";
@@ -9,15 +11,34 @@ import { displayGridSize, displayTimeLimit } from "../../../utils/textDisplay";
 import { gridSizes, timeLimits } from "../../Game/game_logic/constants";
 import { useGameRecords } from "../api";
 import { ScoreCard } from "./ScoreCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ScoresPage() {
   const [gridSize, setGridSize] = useState(gridSizes[0]);
   const [timeLimit, setTimeLimit] = useState(timeLimits[0]);
-
+  
   const sortOptions = ["date", "score"];
   const [sortOrder, setSortOrder] = useState("score");
 
-  const gameRecords = useGameRecords(gridSize, timeLimit, sortOrder);
+  const limit = 5
+  const [startIndex, setStartIndex] = useState(0)
+
+  // Game records with the current selected settings across all pages
+  const records = useGameRecords(gridSize, timeLimit, sortOrder)
+
+  const nextPage = () => {
+    if (!records) return;
+    if (startIndex + limit >= records.length) {
+      return
+    }
+    setStartIndex(prev => prev + limit)
+  }
+  const prevPage = () => {
+    setStartIndex(prev => prev > 0 ? prev - limit : 0)
+  }
+  console.log(startIndex)
+  // Game records with the current selected settings on the current displayed page
+  const displayedRecords = useGameRecords(gridSize, timeLimit, sortOrder, limit, startIndex);
 
   return (
     <>
@@ -47,9 +68,17 @@ export function ScoresPage() {
           onChange={(value) => setSortOrder(value)}
         />
       </div>
+      <div className="flex justify-between">
+        <button onClick={prevPage} className="bg-sky-500 text-white flex justify-center items-center aspect-square w-10 rounded">
+          <FontAwesomeIcon icon={faChevronLeft}/>
+        </button>
+        <button onClick={nextPage} className="bg-sky-500 text-white flex justify-center items-center aspect-square w-10 rounded">
+          <FontAwesomeIcon icon={faChevronRight}/>
+        </button>
+      </div>
       <ul className="flex flex-col gap-4 ">
-        {gameRecords && gameRecords.length > 0 ? (
-          gameRecords.map((record) => (
+        {displayedRecords && displayedRecords.length > 0 ? (
+          displayedRecords.map((record) => (
             <ScoreCard key={record.id} gameRecord={record} />
           ))
         ) : (
