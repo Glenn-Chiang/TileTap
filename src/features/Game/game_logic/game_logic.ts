@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { addGameRecord } from "../../Scores/api";
 import { gameStateSlice } from "../reducers/gameState";
 import { GridPosition, gridSlice, selectGrid } from "../reducers/grid";
 import { scoreSlice, selectScore } from "../reducers/score";
+import { selectTimer } from "../reducers/timer";
 
 export function useCheckHit() {
   const grid = useAppSelector(selectGrid).grid;
@@ -42,8 +44,17 @@ export function useResetGame() {
 export function useEndGame() {
   const dispatch = useAppDispatch();
   const score = useAppSelector(selectScore).score
+  const gridSize = useAppSelector(selectGrid).gridSize
+  const timeLimit = useAppSelector(selectTimer).timeLimit
 
   return () => {
     dispatch(gameStateSlice.actions.endGame());
+
+    try {
+      addGameRecord({score, gridSize, timeLimit})
+      
+    } catch (error) {
+      console.log("Error saving game record:", error)
+    }
   };
 }
